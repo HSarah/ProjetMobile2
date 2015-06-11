@@ -1,9 +1,6 @@
-package com.example.sarra.projetmobile2;
+package xox;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -11,51 +8,45 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.nio.channels.Channel;
 import java.util.ArrayList;
+
+import xox.BDD.DataAccess;
+import xox.R;
+import xox.model.Channel;
 
 
 public class MainActivity extends ActionBarActivity {
 
     public static ArrayList<Channel> channels ;
+    DataAccess dataAccess ;
 
-    ChannelsAdapter adapter ;
+    ChannelListAdapter adapter ;
     ListView listView ;
-
-
-
 
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dataAccess = new DataAccess(this) ;
 
-
-
+        dataAccess.open();
+        dataAccess.supprimerChannel(1);
+        channels = dataAccess.getAllChannels() ;
+        dataAccess.close();
 
         listView = (ListView) findViewById(R.id.listView) ;
-        adapter = new ChannelsAdapter(this, channels);
-        listView.setAdapter(adapter);
+        adapter = new ChannelListAdapter(this, channels) ;
+        listView.setAdapter(adapter) ;
 
         Button add = (Button) findViewById(R.id.button) ;
-        final Button save = (Button) findViewById(R.id.save);
-        final Button load = (Button) findViewById(R.id.load);
-
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +54,6 @@ public class MainActivity extends ActionBarActivity {
                 launchActivity() ;
             }
         });
-
-
 
 
     }

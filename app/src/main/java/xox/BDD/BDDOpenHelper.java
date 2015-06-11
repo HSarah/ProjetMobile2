@@ -1,11 +1,9 @@
-package BDD;
+package xox.BDD;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import java.nio.channels.Channel;
 
 /**
  * Created by Sarra on 16/05/2015.
@@ -25,7 +23,7 @@ public class BDDOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DESC_PROGRAM= "descProgram" ;
     public static final String COLUMN_IMAGE_PROGRAM = "imageURLProgram" ;
     public static final String COLUMN_TIME_PROGRAM = "timeProgram" ;
-     public static final String COLUMN_VIDEO_PROGRAM = "videoURLProgram" ;
+    public static final String COLUMN_VIDEO_PROGRAM = "videoURLProgram" ;
     public static final String COLUMN_CATEGORIE_PROGRAM = "categorieProgram" ;
     public static final String COLUMN_ID_CHANNEL = "_IDChannel" ;
 
@@ -37,19 +35,19 @@ public class BDDOpenHelper extends SQLiteOpenHelper {
             + TABLE_CHANNELS + "("
             + COLUMN_ID + " integer primary key autoincrement, "
             + COLUMN_NOM + " TEXT not null, "
-            + COLUMN_IMAGE + " TEXT not null);"  ;
+            + COLUMN_IMAGE + " integer not null);"  ;
 
     private static final String PROGRAMS_CREATE = "create table "
             + TABLE_PROGRAMS + "("
             + COLUMN_ID_PROGRAM + " integer primary key autoincrement, "
             + COLUMN_NOM_PROGRAM + " TEXT not null, "
             + COLUMN_DESC_PROGRAM + " TEXT not null, "
-            + COLUMN_TIME_PROGRAM + " TEXT not null, "
-            + COLUMN_VIDEO_PROGRAM + " TEXT not null, "
+            + COLUMN_TIME_PROGRAM + " INTEGER not null, "
+            + COLUMN_VIDEO_PROGRAM + " integer not null, "
             + COLUMN_CATEGORIE_PROGRAM + " TEXT not null, "
             + COLUMN_ID_CHANNEL + " integer,"
-            +"FOREIGN KEY (" + COLUMN_ID_CHANNEL + ") REFERENCES "+TABLE_CHANNELS+" ("+COLUMN_ID+"),"
-            + COLUMN_IMAGE_PROGRAM + " TEXT not null);"  ;
+            + COLUMN_IMAGE_PROGRAM + " integer not null,"
+            + " FOREIGN KEY (" + COLUMN_ID_CHANNEL + ") REFERENCES "+TABLE_CHANNELS+" ("+COLUMN_ID+"));"  ;
 
     public BDDOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

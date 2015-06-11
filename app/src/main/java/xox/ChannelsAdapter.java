@@ -1,4 +1,4 @@
-package com.example.sarra.projetmobile2;
+package xox;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import model.Channel;
+import xox.model.Channel;
 
 /**
  * Created by XoX on 26/04/2015.
@@ -30,7 +30,7 @@ public class ChannelsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return channels.size();
+        return 0 ;
     }
 
     @Override
@@ -67,9 +67,9 @@ public class ChannelsAdapter extends BaseAdapter {
         modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, ModifyChannelActivity.class) ;
+               /* Intent intent = new Intent(activity, ModifyChannelActivity.class) ;
                 intent.putExtra("pos", ((int) v.getTag())) ;
-                activity.startActivity(intent);
+                activity.startActivity(intent);*/
             }
         });
 

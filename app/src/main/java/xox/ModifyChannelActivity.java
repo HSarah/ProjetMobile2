@@ -1,4 +1,5 @@
-package com.example.sarra.projetmobile2;
+/*
+package xox;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import xox.MainActivity;
 
 
 public class ModifyChannelActivity extends ActionBarActivity {
@@ -92,3 +95,4 @@ public class ModifyChannelActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+*/

@@ -1,4 +1,4 @@
-package model;
+package xox.model;
 
 /**
  * Created by Sarra on 02/04/2015.

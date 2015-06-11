@@ -1,4 +1,4 @@
-package model;
+package xox.model;
 
 import android.text.format.Time;
 
@@ -13,22 +13,23 @@ public class Program {
     private Boolean interesting ;
     private Time time;
     private int programID ;
+    private int channelID ;
 
     public String getDetails() {
         return details;
     }
 
-    public Program(String name, String details, int imgURL, int videoURL, Boolean interesting, Theme theme, TimeSlot timeSlot, Time time,
-                   int programID) {
+    public Program(String name, String details, int imgURL, int videoURL, Boolean interesting, Theme theme, Time time,
+                   int programID, int channelID) {
         this.name = name;
         this.details = details;
         this.imgURL = imgURL;
         this.videoURL = videoURL;
         this.interesting = interesting;
         this.theme = theme;
-        this.timeSlot = timeSlot;
         this.time = time ;
         this.programID = programID ;
+        this.channelID = channelID ;
     }
 
     public int getProgramID() {
@@ -79,13 +80,6 @@ public class Program {
         this.theme = theme;
     }
 
-    public TimeSlot getTimeSlot() {
-        return timeSlot;
-    }
-
-    public void setTimeSlot(TimeSlot timeSlot) {
-        this.timeSlot = timeSlot;
-    }
 
     public Notification getNotification() {
         return notification;
@@ -105,9 +99,15 @@ public class Program {
     }
 
     private Theme theme ;
-    private TimeSlot timeSlot ;
     private Notification notification;
 
+    public int getChannelID() {
+        return channelID;
+    }
+
+    public void setChannelID(int channelID) {
+        this.channelID = channelID;
+    }
 
 
 }

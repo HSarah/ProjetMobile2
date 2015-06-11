@@ -1,4 +1,4 @@
-package com.example.sarra.projetmobile2;
+package com.example.sarra;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
