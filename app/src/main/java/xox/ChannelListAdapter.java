@@ -77,7 +77,7 @@ public class ChannelListAdapter extends BaseAdapter {
         title.setText(String.valueOf(position+1) + ". " + channel.getName());
 
         Button delete = (Button) convertView.findViewById(R.id.button2) ;
-        delete.setTag(new Integer(position));
+        delete.setTag(new Integer(position)) ;
 
         Button modify = (Button) convertView.findViewById(R.id.button3) ;
         modify.setTag(new Integer(position));
