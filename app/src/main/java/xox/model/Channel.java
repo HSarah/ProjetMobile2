@@ -9,20 +9,20 @@ public class Channel {
 
     private long id ;
     private String name ;
-    private int imgURL ;
+    private String imgURL ;
     private ArrayList<Program> listPrograms ;
 
-    public Channel(long id, String name, int imgURL) {
+    public Channel(long id, String name, String imgURL) {
         this.id = id ;
         this.name = name;
         this.imgURL = imgURL;
     }
 
-    public int getImgURL() {
+    public String getImgURL() {
         return imgURL;
     }
 
-    public void setImgURL(int imgURL) {
+    public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
     }
 

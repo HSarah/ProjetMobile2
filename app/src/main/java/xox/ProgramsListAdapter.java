@@ -18,30 +18,29 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import xox.BDD.DataAccess;
-import xox.model.Channel;
-
+import xox.model.Program;
 
 /**
- * Created by XoX on 31/03/2015.
+ * Created by XoX on 12/06/2015.
  */
-public class ChannelListAdapter extends BaseAdapter {
+public class ProgramsListAdapter extends BaseAdapter {
     private Activity activity ;
     private LayoutInflater inflater ;
-    private ArrayList<Channel> channels ;
+    private ArrayList<Program> programs;
 
-    public ChannelListAdapter(Activity activity, ArrayList<Channel> channels) {
+    public ProgramsListAdapter(Activity activity, ArrayList<Program> programs) {
         this.activity = activity ;
-        this.channels = channels ;
+        this.programs = programs;
     }
 
     @Override
     public int getCount() {
-        return channels.size();
+        return programs.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return channels.get(position);
+        return programs.get(position);
     }
 
     @Override
@@ -57,11 +56,11 @@ public class ChannelListAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.channel, null) ;
         }
-        final Channel channel = channels.get(position) ;
+        final Program program = programs.get(position) ;
         TextView title = (TextView) convertView.findViewById(R.id.channel_title) ;
         ImageView thumbnail = (ImageView) convertView.findViewById(R.id.thumbnail) ;
 
-        String filename = channel.getImgURL() ;
+        String filename = program.getImgURL() ;
         FileInputStream fileInputStream ;
         Bitmap channelImg = null ;
         try {
@@ -74,7 +73,7 @@ public class ChannelListAdapter extends BaseAdapter {
 
         thumbnail.setImageBitmap(channelImg);
 
-        title.setText(String.valueOf(position+1) + ". " + channel.getName());
+        title.setText(String.valueOf(position + 1) + ". " + program.getName());
 
         Button delete = (Button) convertView.findViewById(R.id.button2) ;
         delete.setTag(new Integer(position));
@@ -85,8 +84,8 @@ public class ChannelListAdapter extends BaseAdapter {
         modify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, ModifyChannelActivity.class) ;
-                intent.putExtra("pos", ((int) v.getTag())) ;
+                Intent intent = new Intent(activity, ModifyProgramActivity.class);
+                intent.putExtra("pos", ((int) v.getTag()));
                 activity.startActivity(intent);
             }
         });
@@ -99,14 +98,14 @@ public class ChannelListAdapter extends BaseAdapter {
                 MainActivity.etudiants.remove(((int) v.getTag()));*/
                 DataAccess dataAccess = new DataAccess(activity) ;
                 dataAccess.open();
-                dataAccess.supprimerChannel(channel.getId());
+                dataAccess.supprimerProgram(program.getProgramID());
                 dataAccess.close();
-                MainActivity.channels.remove(position);
+                ProgramsActivity.programs.remove(position);
                 notifyDataSetChanged();
             }
         }); ;
 
-        Log.d("CHANNEL", channel.getId() + " , " + channel.getName() + " , " + channel.getImgURL()) ;
+        Log.d("PROGRAM", program.getProgramID() + " , " + program.getName() + " , " + program.getImgURL()) ;
 
         return convertView ;
     }

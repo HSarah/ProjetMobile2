@@ -3,4 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_modify_channel">ModifyChannelActivity</string>
+    <string name="title_activity_programs">ProgramsActivity</string>
+    <string name="title_activity_add_program">AddProgramActivity</string>
+    <string name="title_activity_modify_program">ModifyProgramActivity</string>
 </resources>

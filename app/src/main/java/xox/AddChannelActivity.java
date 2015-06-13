@@ -16,9 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import xox.BDD.BDDOpenHelper;
 import xox.BDD.DataAccess;
 import xox.model.Channel;
 
@@ -27,6 +27,7 @@ public class AddChannelActivity extends ActionBarActivity {
     EditText nom ;
     EditText image;
     TextView imageURL ;
+    Bitmap yourSelectedImage ;
     private static final int SELECT_PHOTO = 100;
 
     @Override
@@ -52,7 +53,7 @@ public class AddChannelActivity extends ActionBarActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //addChannel() ;
+                addChannel() ;
             }
         });
 
@@ -67,52 +68,47 @@ public class AddChannelActivity extends ActionBarActivity {
                 if(resultCode == RESULT_OK){
 
                     Uri selectedImage = data.getData();
-
+                    imageURL.setText("Image selected");
                     InputStream imageStream = null;
                     try {
                         imageStream = getContentResolver().openInputStream(selectedImage);
-                        imageURL.setText(selectedImage.getPath());
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+                    yourSelectedImage = BitmapFactory.decodeStream(imageStream);
                 }
         }
     }
 
-    public void addChannel() {
+public void addChannel() {
+    // Save Image into local storage ;
+    String filename = (MainActivity.channels.size()+1) + ".png" ;
+    FileOutputStream outputStream ;
+
+    try {
+        outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+        yourSelectedImage.compress(Bitmap.CompressFormat.PNG, 30, outputStream) ;
+        outputStream.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    //Save Image into data base ;
+
+
     DataAccess dataAccess = new DataAccess(this) ;
     dataAccess.open();
-    Channel channel = dataAccess.addChannel(nom.getText().toString(), Integer.parseInt(image.getText().toString()));
+    Channel channel = dataAccess.addChannel(nom.getText().toString(), filename);
     dataAccess.close();
 
     MainActivity.channels.add(channel) ;
     Context context = getApplicationContext() ;
-    CharSequence text = "Chaine ajoutée ! " ;
+    CharSequence text = "Chaine ajoutée !" ;
 
     int duration = Toast.LENGTH_LONG ;
 
     Toast toast = Toast.makeText(context, text, duration) ;
     toast.show() ;
     finish();
-
- /*   Etudiant etudiant = provider.ajouterEtudiant(nom.getText().toString(), prenom.getText().toString(),
-                tel.getText().toString(), date.getText().toString()) ;
-    provider.close();
-
-
-    new Etudiant(mat.getText().toString(), nom.getText().toString(), prenom.getText().toString(),
-                tel.getText().toString(), date.getText().toString()) ;
-
-        MainActivity.channels.add(etudiant) ;
-        Context context = getApplicationContext() ;
-        CharSequence text = "Etudiant ajouté ! " ;
-
-        int duration = Toast.LENGTH_LONG ;
-
-        Toast toast = Toast.makeText(context, text, duration) ;
-        toast.show() ;
-        finish();*/
 }
 
 

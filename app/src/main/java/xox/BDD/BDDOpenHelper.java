@@ -10,14 +10,14 @@ import android.util.Log;
  */
 public class BDDOpenHelper extends SQLiteOpenHelper {
 
-    public static final String TABLE_CHANNELS = "channels" ;
+    public static final String TABLE_CHANNELS = "channelstable" ;
     public static final String COLUMN_ID = "_ID" ;
     public static final String COLUMN_NOM = "nom" ;
     public static final String COLUMN_IMAGE = "imageURL" ;
 
 
     /** La table programme **/
-    public static final String TABLE_PROGRAMS = "programs" ;
+    public static final String TABLE_PROGRAMS = "programstable" ;
     public static final String COLUMN_ID_PROGRAM = "_ID" ;
     public static final String COLUMN_NOM_PROGRAM = "nomProgram" ;
     public static final String COLUMN_DESC_PROGRAM= "descProgram" ;
@@ -27,15 +27,15 @@ public class BDDOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CATEGORIE_PROGRAM = "categorieProgram" ;
     public static final String COLUMN_ID_CHANNEL = "_IDChannel" ;
 
-    public static final String DATABASE_NAME = "channels.db" ;
-    public static final int DATABASE_VERSION = 1 ;
+    public static final String DATABASE_NAME = "chainestv.db" ;
+    public static final int DATABASE_VERSION = 7 ;
 
     // DataBase Creation SQL Statement :
     private static final String CHANNELS_CREATE = "create table "
             + TABLE_CHANNELS + "("
             + COLUMN_ID + " integer primary key autoincrement, "
             + COLUMN_NOM + " TEXT not null, "
-            + COLUMN_IMAGE + " integer not null);"  ;
+            + COLUMN_IMAGE + " TEXT not null);"  ;
 
     private static final String PROGRAMS_CREATE = "create table "
             + TABLE_PROGRAMS + "("
@@ -43,10 +43,10 @@ public class BDDOpenHelper extends SQLiteOpenHelper {
             + COLUMN_NOM_PROGRAM + " TEXT not null, "
             + COLUMN_DESC_PROGRAM + " TEXT not null, "
             + COLUMN_TIME_PROGRAM + " INTEGER not null, "
-            + COLUMN_VIDEO_PROGRAM + " integer not null, "
+            + COLUMN_VIDEO_PROGRAM + " TEXT not null, "
             + COLUMN_CATEGORIE_PROGRAM + " TEXT not null, "
             + COLUMN_ID_CHANNEL + " integer,"
-            + COLUMN_IMAGE_PROGRAM + " integer not null,"
+            + COLUMN_IMAGE_PROGRAM + " TEXT not null,"
             + " FOREIGN KEY (" + COLUMN_ID_CHANNEL + ") REFERENCES "+TABLE_CHANNELS+" ("+COLUMN_ID+"));"  ;
 
     public BDDOpenHelper(Context context) {
@@ -57,7 +57,6 @@ public class BDDOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CHANNELS_CREATE);
         db.execSQL(PROGRAMS_CREATE);
-
     }
 
     @Override

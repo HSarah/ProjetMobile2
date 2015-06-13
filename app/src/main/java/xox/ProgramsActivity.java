@@ -1,13 +1,12 @@
 package xox;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -15,14 +14,16 @@ import java.util.ArrayList;
 
 import xox.BDD.DataAccess;
 import xox.model.Channel;
+import xox.model.Program;
 
 
-public class MainActivity extends ActionBarActivity {
+public class ProgramsActivity extends ActionBarActivity {
 
-    public static ArrayList<Channel> channels ;
+    public static ArrayList<Program> programs;
     DataAccess dataAccess ;
+    int idChannel ;
 
-    ChannelListAdapter adapter ;
+    ProgramsListAdapter adapter ;
     ListView listView ;
 
 
@@ -37,27 +38,18 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_programs);
         dataAccess = new DataAccess(this) ;
 
+        idChannel = getIntent().getExtras().getInt("idChannel");
+
         dataAccess.open();
-        channels = dataAccess.getAllChannels() ;
+        programs = dataAccess.getAllPrograms(idChannel) ;
         dataAccess.close();
 
         listView = (ListView) findViewById(R.id.listView) ;
-        adapter = new ChannelListAdapter(this, channels) ;
+        adapter = new ProgramsListAdapter(this, programs) ;
         listView.setAdapter(adapter) ;
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(MainActivity.this, ProgramsActivity.class);
-
-                i.putExtra("idChannel", (int)channels.get(position).getId());
-
-                startActivity(i);
-            }
-        });
 
         Button add = (Button) findViewById(R.id.button) ;
 
@@ -67,12 +59,11 @@ public class MainActivity extends ActionBarActivity {
                 launchActivity() ;
             }
         });
-
-
     }
 
     public void launchActivity() {
-        Intent intent = new Intent(this, AddChannelActivity.class) ;
+        Intent intent = new Intent(this, AddProgramActivity.class) ;
+        intent.putExtra("idChannel", idChannel);
         startActivity(intent);
     }
 
@@ -102,6 +93,6 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onPause() {
-       super.onPause();
+        super.onPause();
     }
 }

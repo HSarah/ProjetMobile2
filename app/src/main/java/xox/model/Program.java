@@ -8,8 +8,8 @@ import android.text.format.Time;
 public class Program {
     private String name;
     private String details ;
-    private int imgURL ;
-    private int videoURL;
+    private String imgURL ;
+    private String videoURL;
     private Boolean interesting ;
     private Time time;
     private int programID ;
@@ -19,7 +19,7 @@ public class Program {
         return details;
     }
 
-    public Program(String name, String details, int imgURL, int videoURL, Boolean interesting, Theme theme, Time time,
+    public Program(String name, String details, String imgURL, String videoURL, Boolean interesting, Theme theme, Time time,
                    int programID, int channelID) {
         this.name = name;
         this.details = details;
@@ -48,19 +48,19 @@ public class Program {
         this.details = details;
     }
 
-    public int getImgURL() {
+    public String getImgURL() {
         return imgURL;
     }
 
-    public void setImgURL(int imgURL) {
+    public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
     }
 
-    public int getVideoURL() {
+    public String getVideoURL() {
         return videoURL;
     }
 
-    public void setVideoURL(int videoURL) {
+    public void setVideoURL(String videoURL) {
         this.videoURL = videoURL;
     }
 
@@ -107,6 +107,10 @@ public class Program {
 
     public void setChannelID(int channelID) {
         this.channelID = channelID;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
 

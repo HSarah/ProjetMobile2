@@ -6,7 +6,8 @@
     android:paddingRight="6dp"
     android:paddingTop="4dp"
     android:paddingBottom="4dp"
-    android:minHeight="100dp">
+    android:minHeight="100dp"
+    android:descendantFocusability="blocksDescendants">
 
 
     <ImageView
@@ -28,9 +29,10 @@
         android:text="Bein Sport"
         android:id="@+id/channel_title"
         android:textSize="20dp"
-        android:layout_marginLeft="42dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginStart="42dp"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="25dp"
+        android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
         android:layout_toEndOf="@+id/thumbnail" />
 

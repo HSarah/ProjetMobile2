@@ -10,7 +10,6 @@ import android.text.format.Time;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import xox.model.Channel;
 import xox.model.Program;
@@ -36,7 +35,7 @@ public class DataAccess  {
         helper.close();
     }
 
-    public Channel addChannel(String name, int imgURL) {
+    public Channel addChannel(String name, String imgURL) {
         ContentValues values = new ContentValues() ;
         
         
@@ -54,6 +53,7 @@ public class DataAccess  {
     }
 
     public void supprimerChannel(long id) {
+        database.delete(BDDOpenHelper.TABLE_PROGRAMS, BDDOpenHelper.COLUMN_ID_CHANNEL + "=" + id, null) ;
         database.delete(BDDOpenHelper.TABLE_CHANNELS, BDDOpenHelper.COLUMN_ID + "=" + id, null) ;
     }
 
@@ -61,13 +61,13 @@ public class DataAccess  {
         ContentValues values = new ContentValues() ;
 
         values.put(BDDOpenHelper.COLUMN_NOM, channel.getName());
-        values.put(BDDOpenHelper.COLUMN_IMAGE, channel.getName());
+        values.put(BDDOpenHelper.COLUMN_IMAGE, channel.getImgURL());
         database.update(helper.TABLE_CHANNELS, values, BDDOpenHelper.COLUMN_ID + "=" + channel.getId(), null) ;
     }
 
     public ArrayList<Channel> getAllChannels() {
         Cursor cursor = database.query(helper.TABLE_CHANNELS, null, null, null, null, null, null);
-        ArrayList<Channel> channels = new ArrayList<Channel>() ;
+        ArrayList<Channel> channels = new ArrayList<>() ;
 
         cursor.moveToFirst() ;
         while (!cursor.isAfterLast()) {
@@ -81,11 +81,11 @@ public class DataAccess  {
 
     public Channel cursorToChannel(Cursor cursor) {
         Channel channel = new Channel(cursor.getLong(0), cursor.getString(1),
-                cursor.getInt(2)) ;
+                cursor.getString(2)) ;
         return channel ;
     }
 
-    public Program addProgram(String name, String details, int imgURL, int videoURL, Time time, String category , long idChannel) {
+    public Program addProgram(String name, String details, String imgURL, String videoURL, Time time, String category , long idChannel) {
         ContentValues values = new ContentValues() ;
 
         values.put(BDDOpenHelper.COLUMN_NOM_PROGRAM, name);
@@ -145,8 +145,8 @@ public class DataAccess  {
         Time time = new Time() ;
         time.set(cursor.getLong(3));
 
-        Program program = new Program(cursor.getString(1), cursor.getString(2), cursor.getInt(7),
-                 cursor.getInt(4), false, new Theme(cursor.getString(5)), time, cursor.getInt(0), cursor.getInt(6)) ;
+        Program program = new Program(cursor.getString(1), cursor.getString(2), cursor.getString(7),
+                 cursor.getString(4), false, new Theme(cursor.getString(5)), time, cursor.getInt(0), cursor.getInt(6)) ;
 
 
         return program ;

@@ -12,13 +12,29 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".AddChannelActivity"
             android:label="Add Channel" >
+        </activity>
+        <activity
+            android:name=".ModifyChannelActivity"
+            android:label="@string/title_activity_modify_channel" >
+        </activity>
+        <activity
+            android:name=".ProgramsActivity"
+            android:label="@string/title_activity_programs" >
+        </activity>
+        <activity
+            android:name=".AddProgramActivity"
+            android:label="@string/title_activity_add_program" >
+        </activity>
+        <activity
+            android:name=".ModifyProgramActivity"
+            android:label="@string/title_activity_modify_program" >
         </activity>
     </application>
 
