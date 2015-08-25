@@ -6,8 +6,13 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 import android.text.format.Time;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 import xox.BDD.BDDOpenHelper;
 
@@ -22,6 +27,7 @@ public class ChannelContentProvider extends ContentProvider {
     private static final int CATEGORY_ID = 30 ;
     private static final int PERIOD_ID = 40 ;
     private static final int TIME_ID = 50 ;
+    private static final int RES_ID = 60 ;
 
 
 
@@ -30,9 +36,11 @@ public class ChannelContentProvider extends ContentProvider {
     static {
         URI_MATCHER.addURI(ChannelContract.AUTHORITY, ChannelContract.CHANNELS_PATH, CHANNELS);
         URI_MATCHER.addURI(ChannelContract.AUTHORITY, ChannelContract.CHANNELS_PATH+"/#", CHANNEL_ID);
+        //--> Tous les programmes d'une chaine
         URI_MATCHER.addURI(ChannelContract.AUTHORITY, ChannelContract.CATEGORY_PATH+"/*", CATEGORY_ID);
         URI_MATCHER.addURI(ChannelContract.AUTHORITY, ChannelContract.PERIOD_PATH+"/#", PERIOD_ID);
         URI_MATCHER.addURI(ChannelContract.AUTHORITY, ChannelContract.TIME_PATH+"/#", TIME_ID);
+        URI_MATCHER.addURI(ChannelContract.AUTHORITY, ChannelContract.RES_PATH+"/#", RES_ID);
 
     }
     /*******************************************************/
@@ -78,7 +86,7 @@ public class ChannelContentProvider extends ContentProvider {
                 break;
             case CATEGORY_ID :
                 queryBuilder.setTables(BDDOpenHelper.TABLE_PROGRAMS);
-                queryBuilder.appendWhere(BDDOpenHelper.COLUMN_CATEGORIE_PROGRAM + "=" +uri.getLastPathSegment());
+                queryBuilder.appendWhere(BDDOpenHelper.COLUMN_CATEGORIE_PROGRAM + "= '" +  uri.getLastPathSegment()+"'");
                 break;
             case TIME_ID :
                 queryBuilder.setTables(BDDOpenHelper.TABLE_PROGRAMS);
@@ -130,6 +138,10 @@ public class ChannelContentProvider extends ContentProvider {
                 queryBuilder.appendWhere(BDDOpenHelper.COLUMN_TIME_PROGRAM + ">=" + vinf
                         + " AND " + BDDOpenHelper.COLUMN_TIME_PROGRAM  + "<=" + vsup );
                 break;
+            case RES_ID:
+               // String path = BitmapFactory.decodeFile()
+
+                break;
             default: return null ;
         }
         /******************************************************/
@@ -159,4 +171,6 @@ public class ChannelContentProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         return 0;
     }
+
+
 }

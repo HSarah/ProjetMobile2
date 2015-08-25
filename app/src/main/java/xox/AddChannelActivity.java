@@ -29,6 +29,7 @@ public class AddChannelActivity extends ActionBarActivity {
     TextView imageURL ;
     Bitmap yourSelectedImage ;
     private static final int SELECT_PHOTO = 100;
+    String nomFich ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class AddChannelActivity extends ActionBarActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addChannel() ;
+                addChannel();
             }
         });
 
@@ -76,6 +77,9 @@ public class AddChannelActivity extends ActionBarActivity {
                         e.printStackTrace();
                     }
                     yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+
+                   // nomFich = selectedImage.getPath();
+
                 }
         }
     }
@@ -135,4 +139,6 @@ public void addChannel() {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

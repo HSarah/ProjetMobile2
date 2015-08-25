@@ -11,6 +11,7 @@ public final class ChannelContract {
     public  static final String CATEGORY_PATH = "category" ;
     public  static final String PERIOD_PATH = "period" ;
     public  static final String TIME_PATH = "time" ;
+    public static final String RES_PATH = "resource" ;
 
 
     public static final String TABLE_CHANNELS = "channelstable" ;
@@ -31,7 +32,12 @@ public final class ChannelContract {
     public static final String COLUMN_ID_CHANNEL = "_IDChannel" ;
 
 
-    public static final Uri CONTENT_URI = Uri.parse("content://"+ AUTHORITY + "/" + CHANNELS_PATH) ;
 
+
+    public static final Uri CONTENT_URI = Uri.parse("content://"+ AUTHORITY + "/" + CHANNELS_PATH) ;
+    public static final Uri CAT_URI = Uri.parse("content://"+ AUTHORITY + "/" + CATEGORY_PATH) ;
+    public static final Uri TIME_URI = Uri.parse("content://"+ AUTHORITY + "/" + TIME_PATH) ;
+    public static final Uri PERIOD_URI = Uri.parse("content://"+ AUTHORITY + "/" + PERIOD_PATH) ;
+    public static final Uri RES_URI = Uri.parse("content://"+ AUTHORITY + "/" + RES_PATH) ;
 
 }

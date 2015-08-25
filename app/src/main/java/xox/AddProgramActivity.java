@@ -39,6 +39,7 @@ public class AddProgramActivity extends ActionBarActivity {
 
     Bitmap yourSelectedImage ;
 
+
     private static final int SELECT_PHOTO = 100;
 
 
@@ -121,7 +122,8 @@ public class AddProgramActivity extends ActionBarActivity {
                 if(resultCode == RESULT_OK){
 
                     Uri selectedImage = data.getData();
-                    imageURL.setText("Image selected");
+
+                   imageURL.setText("Image selected");
                     InputStream imageStream = null;
                     try {
                         imageStream = getContentResolver().openInputStream(selectedImage);
@@ -146,7 +148,7 @@ public class AddProgramActivity extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //Save Image into data base ;
+                //Save Image into data base ;
 
         Time t = new Time();
         t.set(0, time.getCurrentMinute(), time.getCurrentHour(), 12, 06, 2015);
